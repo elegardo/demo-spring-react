@@ -1,15 +1,31 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+
 import UserList from "./UserList";
 
-const App = () => {
+
+import TagManager from 'react-gtm-module';
+const tagManagerArgs = {
+  gtmId: 'GTM-K7NSWCN'
+}
+
+TagManager.initialize(tagManagerArgs);
+
+class App extends Component {
+
+render() {
+  
   return (
     <div>
       <p>React here!</p>
-      <UserList/>
+
+      <UserList id="user_id"/>
+   
     </div>
   );
 };
+
+}
 
 export default App;
 
