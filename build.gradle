@@ -1,0 +1,74 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+buildscript {
+  ext {
+    springBootVersion = '1.5.10.RELEASE'
+  }
+    
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+
+  dependencies {
+    classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile project(':demo-spring-react-back')
+}
+
+apply plugin: 'application'
+mainClassName = 'demo.DemoApp'
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+jar {
+    from configurations.runtime
+    from ('demo-spring-react-front/dist/') {
+        into 'public'
+    }
+}
+
+jar.dependsOn ':demo-spring-react-front:nodeBuild'
+
+project('demo-spring-react-front') {
+    apply plugin: 'com.moowork.node'
+    
+    //npm_install
+    node {
+        version = '8.11.2'
+        npmVersion = '5.6.0'
+        download = true
+        workDir = file("${project.parent.buildDir}/node")
+        nodeModulesDir = file("${project.projectDir}")
+    }
+     
+    task nodeBuild(type: NpmTask, dependsOn: npm_install) {
+        args = ['run', 'build']
+    }
+    
+    build.dependsOn(nodeBuild)
+    
+    task clean(type: Delete, overwrite: true){
+        delete "dist"
+        delete "build"
+        delete "node_modules"
+        delete ".gradle"
+    }
+
+}
+

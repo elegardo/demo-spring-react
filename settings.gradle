@@ -1,0 +1,4 @@
+rootProject.name = 'demo-spring-react'
+
+include 'demo-spring-react-front'
+include 'demo-spring-react-back'

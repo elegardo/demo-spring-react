@@ -1,4 +1,4 @@
-package cl.elegardo.domain;
+package demo.domain;
 
 public class User {
 	
