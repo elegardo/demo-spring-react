@@ -37,4 +37,5 @@ dependencies {
 
 bootRun {
     classpath = sourceSets.main.runtimeClasspath + configurations.dev
+    args += ["--server.port=8090"]
 }

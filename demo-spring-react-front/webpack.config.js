@@ -40,6 +40,14 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+		contentBase: "./dist",
+		proxy: {
+			"/**": {
+				target: "http://localhost:8090"
+			}
+		}
+	},
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
