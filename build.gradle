@@ -36,15 +36,6 @@ repositories {
   mavenLocal()
 }
 
-jar {
-    from configurations.runtime
-    from ('demo-spring-react-front/dist/') {
-        into 'public'
-    }
-}
-
-jar.dependsOn ':demo-spring-react-front:nodeBuild'
-
 project('demo-spring-react-front') {
     apply plugin: 'com.moowork.node'
     
@@ -69,6 +60,28 @@ project('demo-spring-react-front') {
         delete "node_modules"
         delete ".gradle"
     }
-
 }
+
+jar {
+    from configurations.runtime
+    from ('demo-spring-react-front/dist/') {
+        into 'public'
+    }
+}
+
+jar.dependsOn 'buildFront'
+
+processResources {
+    from ('demo-spring-react-front/dist/') {
+        into 'public'
+    }
+}.dependsOn 'buildFront'
+
+task buildFront {
+    dependsOn ':demo-spring-react-front:nodeBuild'
+}
+
+
+
+
 
