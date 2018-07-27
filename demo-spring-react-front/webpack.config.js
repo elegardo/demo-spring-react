@@ -41,7 +41,8 @@ module.exports = {
     ]
   },
   devServer: {
-		contentBase: "./dist",
+    contentBase: "./dist",
+    port: 8008,
 		proxy: {
 			"/**": {
 				target: "http://localhost:8090"
