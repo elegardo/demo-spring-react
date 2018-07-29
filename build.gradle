@@ -37,6 +37,7 @@ repositories {
 }
 
 project('demo-spring-react-front') {
+
     apply plugin: 'com.moowork.node'
     
     //npm_install
@@ -80,8 +81,3 @@ processResources {
 task buildFront {
     dependsOn ':demo-spring-react-front:nodeBuild'
 }
-
-
-
-
-
