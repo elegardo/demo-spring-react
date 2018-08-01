@@ -40,13 +40,15 @@ class UserList extends React.Component<UserListProps, UserListState> {
     }
 
     return (
-      <div>
+      <div className="users-list">
         <h2>Users List</h2>
-        {users.map((user: User) =>
-          <div>
-            {user.name} {user.lastName}<br/>
-          </div>
-        )}
+        <ul>
+          {users.map((user: User, i) =>
+          <li key={i}>
+            {user.name} {user.lastName}
+          </li>
+          )}
+        </ul>
       </div>
     );
   }

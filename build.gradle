@@ -59,6 +59,7 @@ project('demo-spring-react-front') {
         delete "dist"
         delete "build"
         delete "node_modules"
+        delete "coverage"
         delete ".gradle"
     }
 }
