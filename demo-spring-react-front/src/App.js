@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import TagManager from 'react-gtm-module';
 
 import UserList from "./UserList";
+
+const tagManagerArgs = {
+  gtmId: 'GTM-K7NSWCN'
+}
+
+TagManager.initialize(tagManagerArgs);
 
 class App extends Component {
 
